@@ -11,15 +11,11 @@
 @endforeach
 
 @php
-  if (request()->has('id')) {
-    $action = 'edit';
-    $user = \App\Models\User::find(request()->get('id'));
-  } else {
-    $action = 'add';
-  }
+    $authUser = auth()->user(); // Get the authenticated user
 @endphp
 
 @auth
+<h2>Users You Can Approve</h2>
 <table>
   <thead>
     <tr>
@@ -30,19 +26,18 @@
     </tr>
   </thead>
   <tbody>
-    @foreach (\App\Models\User::all() as $user)
+    @foreach ($authUser->approvals as $user) <!-- Only users the authenticated user can approve -->
       <tr>
         <td>{{ $user->name }}</td>
         <td>{{ $user->email }}</td>
         <td>{{ $user->info->admin == 1 ? 'Yes' : 'No' }}</td>
         <td style="text-align:center">
-          <a href="/admin/entries?user={{ $user->id}}">Approval</a>
+          <a href="/admin/entries?user={{ $user->id }}">Approval</a>
         </td>
       </tr>
     @endforeach
   </tbody>
 </table>
 @endauth
-
 
 @endsection

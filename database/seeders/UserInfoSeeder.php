@@ -46,6 +46,12 @@ class UserInfoSeeder extends Seeder
                 'password' => Hash::make('Password#1'),
                 'admin' => false,
             ],
+            [
+                'name' => 'Normal User 4', 
+                'email' => 'user4@example.com',
+                'password' => Hash::make('Password#1'),
+                'admin' => false,
+            ],
         ];
     
         foreach ($users as $userData) {

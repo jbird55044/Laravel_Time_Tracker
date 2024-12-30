@@ -20,40 +20,25 @@
 
   <p>Below is a list of default users and roles.  Note: All users have the same default password</p>
   <p>Default Password is: ___________________</p>
-<table>
+
+  <table>
     <thead>
-        <tr>
-            <th>User ID</th>
-            <th>User Name</th>
-            <th>Role</th>
-        </tr>
+      <tr>
+        <th>Table ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Admin</th>
+      </tr>
     </thead>
     <tbody>
+      @foreach (\App\Models\User::orderBy('id')->get() as $user)
         <tr>
-            <td>admin@welcome.com</td>
-            <td>Administrator</td>
-            <td>Administrator</td>
+          <td>{{ $user->id}}</td>
+          <td>{{ $user->name }}</td>
+          <td>{{ $user->email }}</td>
+          <td>{{ $user->info->admin == 1 ? 'Yes' : 'No' }}</td>
         </tr>
-        <tr>
-            <td>jbird@JamesDBird.com</td>
-            <td>James Bird</td>
-            <td>Approver of all</td>
-        </tr>
-        <tr>
-            <td>user1@welcome.com</td>
-            <td>Normal User 1</td>
-            <td>Aprover for Some</td>
-        </tr>
-        <tr>
-            <td>user2@welcome.com</td>
-            <td>Normal User 2</td>
-            <td>General User</td>
-        </tr>
-        <tr>
-            <td>user3@welcome.com</td>
-            <td>Normal User 3</td>
-            <td>General User</td>
-        </tr>
+      @endforeach
     </tbody>
-</table>
+  </table>
 @endsection

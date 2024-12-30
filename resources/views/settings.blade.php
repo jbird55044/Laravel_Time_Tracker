@@ -17,11 +17,13 @@
 
 <form method="POST">
     @csrf
+    <small></small>
     <label>
-        Name
+        Name 
         <input name="name" type="text" value="{{ $user->name }}" autofocus required>
     </label>
-
+    <small>User id: {{ $user->id }}</small>
+    <label></label>
     <label>
         Email
         <input name="email" type="text" value="{{ $user->email }}" autofocus required>

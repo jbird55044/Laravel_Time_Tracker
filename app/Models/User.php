@@ -81,4 +81,26 @@ class User extends Authenticatable
         return $this->hasMany(Entry::class);
     }
 
+    public function approvers()
+    {
+        return $this->belongsToMany(
+            User::class,
+            'approvers',          // Pivot table name
+            'user_id',            // Foreign key on the pivot table for this user
+            'approver_id'         // Foreign key on the pivot table for the approvers
+        );
+    }
+
+    /**
+     * Users whose timecards this user can approve.
+     */
+    public function approvals()
+    {
+        return $this->belongsToMany(
+            User::class,
+            'approvers',          // Pivot table name
+            'approver_id',        // Foreign key on the pivot table for this user
+            'user_id'             // Foreign key on the pivot table for the users they can approve
+        );
+    }
 }
