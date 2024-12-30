@@ -1,5 +1,4 @@
 <?php
-
 namespace Database\Seeders;
 
 use Illuminate\Support\Facades\DB;
@@ -16,37 +15,53 @@ class UserInfoSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('user_infos')->insert([
-            'user_id' => User::factory()->create([
+        $users = [
+            [
                 'name' => 'James Bird', 
                 'email' => 'jbird.m1@jamesdbird.com',
-                'password'=> Hash::make('Password#1')
-            ])->id,
-            'admin' => false,
-            'created_at' => date('Y/m/d H:i:s'),
-            'updated_at' => date('Y/m/d H:i:s'),
-        ]);
-
-        DB::table('user_infos')->insert([
-            'user_id' => User::factory()->create([
-                'name' => 'Normal User 2', 
-                'email' => 'user2@example.com',
-                'password'=> Hash::make('Password#1')
-            ])->id,
-            'admin' => false,
-            'created_at' => date('Y/m/d H:i:s'),
-            'updated_at' => date('Y/m/d H:i:s'),
-        ]);
-
-        DB::table('user_infos')->insert([
-            'user_id' => User::factory()->create([
+                'password' => Hash::make('Password#1'),
+                'admin' => true,
+            ],
+            [
                 'name' => 'Administrator', 
                 'email' => 'admin@example.com',
-                'password'=> Hash::make('Password#1')
-            ])->id,
-            'admin' => true,
-            'created_at' => date('Y/m/d H:i:s'),
-            'updated_at' => date('Y/m/d H:i:s'),
-        ]); 
-    }   
+                'password' => Hash::make('Password#1'),
+                'admin' => true,
+            ],
+            [
+                'name' => 'Normal User 1', 
+                'email' => 'user1@example.com',
+                'password' => Hash::make('Password#1'),
+                'admin' => false,
+            ],
+            [
+                'name' => 'Normal User 2', 
+                'email' => 'user2@example.com',
+                'password' => Hash::make('Password#1'),
+                'admin' => false,
+            ],
+            [
+                'name' => 'Normal User 3', 
+                'email' => 'user3@example.com',
+                'password' => Hash::make('Password#1'),
+                'admin' => false,
+            ],
+        ];
+    
+        foreach ($users as $userData) {
+            $user = User::factory()->create([
+                'name' => $userData['name'],
+                'email' => $userData['email'],
+                'password' => $userData['password'],
+            ]);
+    
+            DB::table('user_infos')->insert([
+                'user_id' => $user->id,
+                'admin' => $userData['admin'],
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        }
+    }
 }
+

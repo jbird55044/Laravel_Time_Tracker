@@ -21,6 +21,8 @@ Route::middleware(['auth'])->group(function() {
     Route::post('/entry/edit', [EntryController::class, 'edit']);
     Route::get('/entry/delete', [EntryController::class, 'delete']);
 
+    Route::view('/approval', 'approval')->name('approval');
+
     Route::view('/settings', 'settings')->name('settings');
     Route::post('/settings', [UserController::class, 'update']);
     
@@ -41,6 +43,7 @@ Route::middleware(['auth', 'admin'])->group(function() {
     Route::get('/admin/user/delete', [UserController::class, 'delete']);
     
     Route::view('/admin/entries', '/admin/entries')->name('admin-entries');
+    Route::put('/entries/{id}/toggle-approve', [EntryController::class, 'toggleApprove'])->name('entries.toggleApprove');
 });
 
 

@@ -5,6 +5,7 @@
       <th>Name</th>
       <th>Email</th>
       <th>Admin</th>
+      <th>Time</th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -14,6 +15,9 @@
         <td><a href="/admin/user?id={{$user->id}}">{{ $user->name }}</a></td>
         <td>{{ $user->email }}</td>
         <td>{{ $user->info->admin == 1 ? 'Yes' : 'No' }}</td>
+        <td style="text-align:center">
+          <a href="/admin/entries?user={{ $user->id}}">Approve</a>
+        </td>
         <td style="text-align:center">
           <a href="/admin/user/delete?id={{ $user->id }}"
           onClick="return confirm('Are you sure you want to delete user entry {{ $user->id }} ?')">Delete {{$user->id}}</a>

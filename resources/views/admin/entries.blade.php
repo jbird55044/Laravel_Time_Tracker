@@ -1,16 +1,30 @@
 @extends('layouts.default')
-@section('title', 'Admin - Entries')
+@section('title', 'Admin Approval - Time Entries')
 @section('content')
 @php
     $user_id = request()->get('user');
     $user = \App\Models\User::find($user_id);
 @endphp
 
+
+
 <h2>Time Entries for:  {{ $user->name }}</h2>
+<small>User ID:  {{$user_id}} </small>
+
+@if (session('success'))
+    <div style="color: green;">{{ session('success') }}</div>
+@endif
+
+@if (session('error'))
+    <div style="color: red;">{{ session('error') }}</div>
+@endif
+
+@foreach ($errors->all() as $error)
+  <p class="error">{{ $error }}</p>
+@endforeach
 
 <table>
-  <p>Entry for User ID:  {{$user_id}} </p>
-  <thead>
+   <thead>
     <tr>
       <th>Job</th>
       <th>Date</th>
@@ -28,10 +42,20 @@
         <td>{{ $entry->hours }}</td>
         <td>{{ $entry->description }}</td>
         <td style="text-align: center">
-          {!! $entry->approvals->count() > 0 ? '&checkmark;' : '' !!}
+          {!! $entry->approvals->count() > 0 ? '&checkmark;' : '' !!}  {{-- the !! is to allow the &checkmark to work --}}
         </td>
+        {{-- <td>
+          <a href="/admin/entries?user={{ $user_id }}&approve={{ $entry->id }}">
+            {{ $entry->approvals->count() > 0 ? 'Decline' : 'Approve'}}</a>
+        </td> --}}
         <td>
-          <a href="/admin/entries?user={{ $user_id }}&approve={{ $entry->id }}">Approve</a>
+          <form action="{{ route('entries.toggleApprove', $entry->id) }}" method="POST" style="display: inline;">
+            @csrf
+            @method('PUT')
+            <button type="submit" class="btn">
+              {{ $entry->approvals->count() > 0 ? 'Decline' : 'Approve' }}
+            </button>
+          </form>
         </td>
       </tr>
     @endforeach
