@@ -5,6 +5,7 @@
       <th>Name</th>
       <th>Email</th>
       <th>Admin</th>
+      <th>Approvers</th>
       <th>Time</th>
       <th>Actions</th>
     </tr>
@@ -15,6 +16,9 @@
         <td><a href="/admin/user?id={{$user->id}}">{{ $user->name }}</a></td>
         <td>{{ $user->email }}</td>
         <td>{{ $user->info->admin == 1 ? 'Yes' : 'No' }}</td>
+        <td style="text-align:center">
+          <a href="/admin/approvers?user={{ $user->id}}">Approver Setup</a>
+        </td>
         <td style="text-align:center">
           <a href="/admin/entries?user={{ $user->id}}">Approve</a>
         </td>

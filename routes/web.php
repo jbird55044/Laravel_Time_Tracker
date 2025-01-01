@@ -4,6 +4,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\EntryController;
 use App\Http\Controllers\JobController;
+use App\Http\Controllers\Api\ApproverController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -41,9 +42,12 @@ Route::middleware(['auth', 'admin'])->group(function() {
     Route::post('/admin/user/add', [UserController::class, 'add']);
     Route::post('/admin/user/edit', [UserController::class, 'edit']);
     Route::get('/admin/user/delete', [UserController::class, 'delete']);
+
+    Route::view('/admin/approvers', '/admin/approvers')->name('admin-approvers');
     
     Route::view('/admin/entries', '/admin/entries')->name('admin-entries');
     Route::put('/entries/{id}/toggle-approve', [EntryController::class, 'toggleApprove'])->name('entries.toggleApprove');
+
 });
 
 

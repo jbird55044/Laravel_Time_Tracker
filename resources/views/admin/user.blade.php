@@ -21,6 +21,8 @@
     Name
     <input name="name" type="text" value="{{ isset($user) ? $user->name : old('name') }}" autofocus required>
   </label>
+  <small>User ID: {{$user->id}} </small>
+  <label></label>
   <label>
     Email
     <input name="email" type="email" value="{{ isset($user) ? $user->email : old('email') }}" required>

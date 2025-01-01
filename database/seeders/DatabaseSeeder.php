@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
             JobCodeSeeder::class,
             EntrySeeder::class,
             ApprovalSeeder::class,
-            ApproverSeeder::class,
+            Approver_UserSeeder::class,
         ]);
                                     
     }

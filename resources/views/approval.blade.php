@@ -1,5 +1,5 @@
 @extends('layouts.default')
-@section('title', 'Entries')
+@section('title', 'Approve Time')
 @section('content')
 
 @session('success')
@@ -32,7 +32,7 @@
         <td>{{ $user->email }}</td>
         <td>{{ $user->info->admin == 1 ? 'Yes' : 'No' }}</td>
         <td style="text-align:center">
-          <a href="/admin/entries?user={{ $user->id }}">Approval</a>
+          <a href="/admin/entries?user={{ $user->id }}">Approve</a>
         </td>
       </tr>
     @endforeach
