@@ -29,18 +29,6 @@ class UserInfoSeeder extends Seeder
                 'admin' => true,
             ],
             [
-                'name' => 'Normal User 1', 
-                'email' => 'user1@example.com',
-                'password' => Hash::make('Password#1'),
-                'admin' => false,
-            ],
-            [
-                'name' => 'Normal User 2', 
-                'email' => 'user2@example.com',
-                'password' => Hash::make('Password#1'),
-                'admin' => false,
-            ],
-            [
                 'name' => 'Normal User 3', 
                 'email' => 'user3@example.com',
                 'password' => Hash::make('Password#1'),
@@ -49,6 +37,18 @@ class UserInfoSeeder extends Seeder
             [
                 'name' => 'Normal User 4', 
                 'email' => 'user4@example.com',
+                'password' => Hash::make('Password#1'),
+                'admin' => false,
+            ],
+            [
+                'name' => 'Normal User 5', 
+                'email' => 'user5@example.com',
+                'password' => Hash::make('Password#1'),
+                'admin' => false,
+            ],
+            [
+                'name' => 'Normal User 6', 
+                'email' => 'user6@example.com',
                 'password' => Hash::make('Password#1'),
                 'admin' => false,
             ],

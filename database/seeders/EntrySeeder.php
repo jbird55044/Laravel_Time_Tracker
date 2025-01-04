@@ -16,7 +16,7 @@ class EntrySeeder extends Seeder
     {
         $faker = Faker::create();
 
-        foreach (range(1, 5) as $index) {
+        foreach (range(1, 7) as $index) {
             DB::table('entries')->insert([
                 'user_id' => $faker->numberBetween(1, 2),
                 'job_id' => $faker->numberBetween(1, 4),
@@ -30,7 +30,7 @@ class EntrySeeder extends Seeder
 
         foreach (range(1, 40) as $index) {
             DB::table('entries')->insert([
-                'user_id' => $faker->numberBetween(3, 5),
+                'user_id' => $faker->numberBetween(3, 6),
                 'job_id' => $faker->numberBetween(1, 4),
                 'entry_date' => $faker->dateTimeThisYear(),
                 'hours' => ($faker->numberBetween(10, 250)) / 10,

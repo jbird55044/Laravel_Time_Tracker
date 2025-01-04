@@ -10,13 +10,19 @@
     <p class="error">{{ $error }}</p>
 @endforeach
 
-<h2>Job Codes Management</h2>
+<div class="selector-box">
+    <h2 class="selector-box">Job Codes Management</h2>
     @include('/components/admin/jobs')
+</div>
 
-<h2>User and Approver Management</h2>
+<div class="selector-box">
+    <h2 class="selector-box">User and Approver Management</h2>
     @include('/components/admin/users')
+</div>
 
-<h2>Approver Management</h2>
+<div class="selector-box">
+    <h2 class="selector-box">Approver Management</h2>
     @include('/components/admin/approvers_list')
+</div>
 
 @endsection

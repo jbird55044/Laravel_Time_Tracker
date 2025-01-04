@@ -9,8 +9,8 @@
 </head>
 <body>
     <header> 
-        <h1>Time Tracker - @yield('title') </h1>
         @include('components/nav')
+        <h1>Time Tracker - @yield('title') </h1>
     </header>
     <main>
         @yield('content')

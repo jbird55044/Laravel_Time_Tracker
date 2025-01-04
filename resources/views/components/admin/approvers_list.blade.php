@@ -11,7 +11,7 @@
   <tbody>
     @foreach (\App\Models\User::orderBy('id')->get() as $user)
       <tr>
-        <td>{{ $user->name }}</td>
+        <td>{{ $user->name }} -- id:{{ $user->id }}</td>
         <td>{{ $user->email }}</td>
         <td>{{ $user->info->admin == 1 ? 'Yes' : 'No' }}</td>
         <td style="text-align:center">

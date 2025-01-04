@@ -15,7 +15,7 @@
 @endphp
 
 @auth
-<h2>Users You Can Approve</h2>
+<h2>Users Who Can Approve You</h2>
 <table>
   <thead>
     <tr>
@@ -26,13 +26,13 @@
     </tr>
   </thead>
   <tbody>
-    @foreach ($authUser->approvals as $user) <!-- Only users the authenticated user can approve -->
+    @foreach ($authUser->approvers as $user) <!-- Users who can approve the authenticated user -->
       <tr>
         <td>{{ $user->name }}</td>
         <td>{{ $user->email }}</td>
         <td>{{ $user->info->admin == 1 ? 'Yes' : 'No' }}</td>
         <td style="text-align:center">
-          <a href="/admin/entries?user={{ $user->id }}">Approve</a>
+          <a href="/admin/entries?user={{ $user->id }}">View</a>
         </td>
       </tr>
     @endforeach
