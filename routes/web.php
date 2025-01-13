@@ -12,8 +12,9 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
+
+
 Route::middleware(['auth'])->group(function() {
-    Route::view('/', 'index')->name('home');
 
     Route::view('/entries', 'entries')->name('entries');
 
@@ -45,16 +46,16 @@ Route::middleware(['auth', 'admin'])->group(function() {
 
     Route::view('/admin/approvers', '/admin/approvers')->name('admin-approvers');
     
+});
+
+// prepare for middleware logic to only allow authorized approvers
+Route::middleware(['auth', 'approver'])->group(function() {
     Route::view('/admin/entries', '/admin/entries')->name('admin-entries');
     Route::put('/entries/{id}/toggle-approve', [EntryController::class, 'toggleApprove'])->name('entries.toggleApprove');
-
 });
 
 
-// Route::get('/', function () {
-//     return view('index')->name('home');
-// });
-
+Route::view('/', 'index')->name('home');
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/login', [AuthController::class, 'loginHandler']);
 

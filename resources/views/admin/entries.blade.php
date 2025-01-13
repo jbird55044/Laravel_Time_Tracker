@@ -6,10 +6,10 @@
     $user = \App\Models\User::find($user_id);
 @endphp
 
-
-
-<h2>Time Entries for:  {{ $user->name }}</h2>
-<small>User ID:  {{$user_id}} </small>
+<div class="header-container">
+  <h2>Time Entries for:  {{ $user->name }}</h2>
+  <small class="inline">User ID: {{$user->id}}</small>
+</div>
 
 @if (session('success'))
     <div style="color: green;">{{ session('success') }}</div>
@@ -35,7 +35,8 @@
     </tr>
   </thead>
   <tbody>
-    @foreach ($user->entries as $entry)
+    
+    @foreach ($user->entries->sortBy('entry_date') as $entry)
       <tr>
         <td>{{ $entry->job->name }}</td>
         <td>{{ $entry->entry_date }}</td>

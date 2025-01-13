@@ -4,26 +4,26 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Support\Facades\Auth;
-use App\Models\User\isAdmin;
 
 class AdminMiddleware
-
 {
     public function handle($request, Closure $next)
-    {        
-        //dd(Auth::user());   //troubleshooting syntax
-        
-        // $user = Auth::user()->load('user_infos');  //Eager Load the Relationship  
-        // if ($user && $user->isAdmin()) {           //isAdmin not visable in his middleware
-        //     return $next($request);
-        // }
+    {
+        // Get the authenticated user
+        $user = Auth::user();
 
-        // Ensure the user is logged in and is an admin
-        if (Auth::check() && Auth::user()->user_infos->admin) {
-            return $next($request);
+        // Log user details for debugging  (check:  tail ./storage/logs/laravel.log)
+        logger()->info('AdminMiddleware: Checking user', [
+            'user_id' => $user->id ?? null,
+            'is_admin' => $user->user_infos->admin ?? null
+        ]);
+
+        // Check if the user is authenticated and is an admin
+        if ($user && $user->user_infos && $user->user_infos->admin) {
+            return $next($request); // Allow the request to proceed
         }
 
-        // Redirect or return error if not admin
+        // Redirect if the user is not authorized
         return redirect()->route('home')->with('error', 'Unauthorized access.');
     }
 }

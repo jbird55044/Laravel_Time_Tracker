@@ -34,7 +34,7 @@
               <a href="/entry?id={{ $entry->id }}">Edit</a>
               <a >-</a>
               <a href="/entry/delete?id={{ $entry->id }}"
-                onClick="return confirm('Are you sure you want to delete entry {{ $entry->id }} ?')">Delete {{$entry->id}}</a>
+                onClick="return confirm('Are you sure you want to delete entry {{ $entry->id }} ?')">Delete</a>
           @endif
 
           {!! $entry->approvals->count() > 0 ? '&checkmark;' : '' !!}

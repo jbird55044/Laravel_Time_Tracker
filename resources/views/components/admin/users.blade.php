@@ -11,7 +11,8 @@
     </tr>
   </thead>
   <tbody>
-    @foreach (\App\Models\User::all() as $user)
+    {{-- @foreach (\App\Models\User::all() as $user) --}}
+    @foreach (\App\Models\User::orderBy('id')->get() as $user)
       <tr>
         <td><a href="/admin/user?id={{$user->id}}">{{ $user->name }}</a></td>
         <td>{{ $user->email }}</td>
@@ -37,4 +38,5 @@
     </tr>
   </tfoot>
 </table>
+
 @endauth

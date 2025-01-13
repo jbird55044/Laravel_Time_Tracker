@@ -20,9 +20,9 @@
     @include('/components/admin/users')
 </div>
 
-<div class="selector-box">
+{{-- <div class="selector-box">
     <h2 class="selector-box">Approver Management</h2>
     @include('/components/admin/approvers_list')
-</div>
+</div> --}}
 
 @endsection

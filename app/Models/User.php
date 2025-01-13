@@ -36,13 +36,19 @@ class User extends Authenticatable
         return $this->belongsToMany(User::class, 'approver_user', 'user_id', 'approver_id')->withTimestamps();
     }
     
-    public function approvals(): BelongsToMany
+        /**
+         * Get the users whose timecards this user can approve.
+         *
+         * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+        */     
+
+    public function approvals()
     {
         return $this->belongsToMany(
             User::class,
-            'approver_user',
-            'approver_id',
-            'user_id'
+            'approver_user', // Pivot table name
+            'approver_id',   // Foreign key on the pivot table for this user
+            'user_id'        // Foreign key on the pivot table for the users they can approve
         );
     }
 

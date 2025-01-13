@@ -17,6 +17,7 @@ class Approver_UserSeeder extends Seeder
         // User ID 01 can be approved by users 05
         $user01 = User::find(1);
         $user01->approvers()->attach([
+            4 => ['created_at' => $now, 'updated_at' => $now],
             5 => ['created_at' => $now, 'updated_at' => $now],
             6 => ['created_at' => $now, 'updated_at' => $now],
         ]);
@@ -50,7 +51,7 @@ class Approver_UserSeeder extends Seeder
           $user06 = User::find(6);
           $user06->approvers()->attach([
               1 => ['created_at' => $now, 'updated_at' => $now],
-              5 => ['created_at' => $now, 'updated_at' => $now],
+              3 => ['created_at' => $now, 'updated_at' => $now],
           ]);
 
         $this->command->info('Approver relationships with timestamps have been seeded!');
