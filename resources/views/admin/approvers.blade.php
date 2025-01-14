@@ -53,7 +53,9 @@
     </div>    
 </div>
 
-<button type="button" onclick="location.href='/admin'">Back to Admin</button>
+<div class="selector-box">
+    <button type="button" onclick="location.href='/admin'">Back to Admin</button>
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue-multiselect@2.1.6"></script>
