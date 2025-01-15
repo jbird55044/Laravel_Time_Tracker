@@ -32,15 +32,16 @@
     <input name="password" type="password">
     <small>leave empty to remain unchanged</small>
   </label>
+    
   <label>
-    Admin
-    <input type="checkbox" name="admin"
-      @checked(isset($user) && $user->isAdmin())
-      @disabled(isset($user) && Auth::user()->id == $user->id)
-    >
-    <!-- Hidden input to ensure the admin value is sent -->
-    <input type="hidden" name="admin" value="{{ isset($user) && $user->isAdmin() ? '1' : '0' }}">
-</label>
+      Admin
+      <input type="checkbox" name="admin"
+          @checked(isset($user) && $user->isAdmin())
+          @disabled(isset($user) && Auth::user()->id == $user->id)
+      >
+      <!-- Preserve the initial state of the admin flag -->
+      <input type="hidden" name="initial_admin" value="{{ isset($user) && $user->isAdmin() ? '1' : '0' }}">
+  </label>
 
   <button type="submit">Save</button>
   <button type="button" onclick="location.href='/admin'">Cancel</button>

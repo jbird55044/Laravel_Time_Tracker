@@ -82,8 +82,8 @@ class UserController extends Controller
             ->withSuccess('User has been added.');
     }
 
-    public function edit(Request $request) {   //admin function only
-
+    public function edit(Request $request)
+    {
         $request->validate([
             'id' => 'required|integer',
             'name' => [
@@ -100,28 +100,36 @@ class UserController extends Controller
         ]);
 
         $user = User::find($request->id);
+        $isAuthenticatedUser = Auth::id() === $user->id;
+
+        // Prevent changes to the authenticated user's own admin status
+        if ($isAuthenticatedUser) {
+            $request->merge(['admin' => $user->info->admin]);
+        }
+
         $user->name = $request->name;
         $user->email = $request->email;
-        $info = $user->info;
-        $info->admin = $request->has('admin');  //sets the admin flag to true if present in the request, or false otherwise.
+
         if ($request->filled('password')) {
             $user->password = Hash::make($request->password);
         }
-       
-        DB::beginTransaction();   //start roll-back point
+
+        $info = $user->info;
+        $info->admin = $request->has('admin');
+
+        DB::beginTransaction();
 
         try {
             $user->save();
             $info->save();
         } catch (\Throwable $th) {
-            DB::rollback();     // if error, roll back to start point
-            return back()
-            -> withErrors(['user could not be Modified.']);
+            DB::rollback();
+            return back()->withErrors(['User could not be modified.']);
         }
-        DB::commit();    // commit point
-        
-        return redirect('/admin')
-            ->withSuccess('User have been modified.');
+
+        DB::commit();
+
+        return redirect('/admin')->withSuccess('User has been modified.');
     }
 
     public function delete(Request $request) {   //admin function only
